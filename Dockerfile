@@ -7,6 +7,8 @@ RUN npm install -g pnpm
 RUN pnpm i
 RUN pnpm build
 
-FROM nginx 
+FROM nginx
+COPY --from=builder /app/nginx /etc/nginx/conf.d
 EXPOSE 80 
 COPY --from=builder /app/out /usr/share/nginx/html
+
