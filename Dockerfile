@@ -3,9 +3,8 @@ WORKDIR /app
 RUN mkdir node_modules
 COPY . .
 
-RUN npm install -g pnpm
-RUN pnpm i --omit=dev
-RUN pnpm build
+RUN npm i --omit=dev
+RUN npm run build
 
 FROM nginx
 COPY --from=builder /app/nginx /etc/nginx/conf.d
