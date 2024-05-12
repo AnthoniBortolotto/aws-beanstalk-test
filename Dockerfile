@@ -2,9 +2,9 @@ FROM node:20-alpine as builder
 WORKDIR /app
 COPY . .
 
-RUN npm install -g yarn
-RUN yarn install
-RUN yarn build
+RUN npm install -g pnpm
+RUN pnpm install
+RUN pnpm build
 
 FROM nginx
 COPY --from=builder /app/nginx /etc/nginx/conf.d
