@@ -1,10 +1,10 @@
 FROM node:20-alpine as builder
-WORKDIR /app 
-RUN mkdir node_modules
+WORKDIR /app
 COPY . .
 
-RUN npm i --omit=dev
-RUN npm run build
+RUN npm install -g yarn
+RUN yarn install
+RUN yarn build
 
 FROM nginx
 COPY --from=builder /app/nginx /etc/nginx/conf.d
