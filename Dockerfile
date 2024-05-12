@@ -1,10 +1,10 @@
 FROM node:20-alpine as builder
 WORKDIR /app 
+RUN mkdir node_modules
+COPY . .
 
-COPY . . 
 RUN npm install -g pnpm
-
-RUN pnpm i
+RUN pnpm i --omit=dev
 RUN pnpm build
 
 FROM nginx
